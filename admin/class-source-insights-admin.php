@@ -100,4 +100,55 @@ class Source_Insights_Admin {
 
 	}
 
+	/**
+	 * Setup admin menu that manage links and sources.
+	 *
+	 * @since    1.0.0
+	 */
+	public function setup_admin_menu() {
+
+		add_menu_page( 'Source Insights', 'Source Insights', 'manage_options', 'source-insights-links' );
+		
+		add_submenu_page(
+			'source-insights-links',
+			'Links',
+			'Links',
+			'manage_options',
+			'source-insights-links',
+			array( $this, 'source_insights_links_content' )
+		);
+
+		add_submenu_page(
+			'source-insights-links',
+			'Sources',
+			'Sources',
+			'manage_options',
+			'source-insights-sources',
+			array( $this, 'source_insights_sources_content' )
+		);
+
+	}
+
+	/**
+	 * Display content for link page.
+	 *
+	 * @since    1.0.0
+	 */
+	public function source_insights_links_content() {
+
+		echo 'links';
+
+	}
+
+	/**
+	 * Display content for source page.
+	 *
+	 * @since    1.0.0
+	 */
+	public function source_insights_sources_content() {
+
+		echo 'sources';
+		
+	}
+
 }
