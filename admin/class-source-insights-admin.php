@@ -151,4 +151,32 @@ class Source_Insights_Admin {
 		
 	}
 
+	/**
+	 * Handle ajax request.
+	 *
+	 * @since    1.0.0
+	 */
+	public function handle_ajax_requests() {
+
+		// test function
+		add_action(
+			'wp_ajax_souins_ajax_test_function',
+			array( $this, 'souins_ajax_test_function')
+		);
+
+		add_action(
+			'wp_ajax_nopriv_souins_ajax_test_function',
+			array( $this, 'souins_ajax_test_function' )
+		);
+
+	}
+
+	public function souins_ajax_test_function() {
+
+	    // return
+	    echo json_encode('test function');
+	    wp_die();
+
+	}
+
 }
