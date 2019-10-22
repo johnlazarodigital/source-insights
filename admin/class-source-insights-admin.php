@@ -158,6 +158,24 @@ class Source_Insights_Admin {
 	 */
 	public function handle_ajax_requests() {
 
+		// prepare script for enqueue
+		wp_register_script(
+			'souins_ajax_scripts',
+			plugin_dir_url( __FILE__ ) . 'js/source-insights-ajax.js',
+			array('jquery')
+		);
+		
+		// send ajax url to frontend
+		wp_localize_script(
+			'souins_ajax_scripts',
+			'ajax_data',
+			array( 'url' => admin_url( 'admin-ajax.php' ) )
+		);        
+
+		// enqueue script for ajax requests
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'souins_ajax_scripts' );
+
 		// test function
 		add_action(
 			'wp_ajax_souins_ajax_test_function',
