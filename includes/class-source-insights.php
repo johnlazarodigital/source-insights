@@ -78,6 +78,8 @@ class Source_Insights {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_global_hooks();
+		$this->define_handlers_hooks();
 
 	}
 
@@ -122,6 +124,18 @@ class Source_Insights {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-source-insights-public.php';
 
+		/**
+		 * The class responsible for defining all actions that occur in the public-facing
+		 * side of the site.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'global/class-source-insights-global.php';
+
+		/**
+		 * The class responsible for defining all actions that occur in the public-facing
+		 * side of the site.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'handlers/class-source-insights-ajax-requests-handler.php';
+
 		$this->loader = new Source_Insights_Loader();
 
 	}
@@ -158,7 +172,6 @@ class Source_Insights {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'setup_admin_menu' );
-		$this->loader->add_action( 'init', $plugin_admin, 'handle_ajax_requests' );
 
 	}
 
@@ -175,6 +188,36 @@ class Source_Insights {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to the public-facing functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_global_hooks() {
+
+		$plugin_global = new Source_Insights_Global( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'init', $plugin_global, 'test_global_function' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to the public-facing functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_handlers_hooks() {
+
+		$plugin_ajax_requests_handler = new Source_Insights_Ajax_Requests_Handler( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'init', $plugin_ajax_requests_handler, 'init' );
 
 	}
 
