@@ -135,6 +135,7 @@ class Source_Insights {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'handlers/class-source-insights-ajax-requests-handler.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'handlers/class-source-insights-db-queries-handler.php';
 
 		$this->loader = new Source_Insights_Loader();
 

@@ -21,6 +21,15 @@
  * @author     John Lazaro <johnlazarodigital@gmail.com>
  */
 class Source_Insights_Ajax_Requests_Handler {
+	
+	private $db;
+
+	public function __construct() {
+
+	    $db = new Source_Insights_Db_Queries_Handler();
+	    $this->db = $db;
+
+	}
 
 	public function init() {
 
@@ -67,8 +76,10 @@ class Source_Insights_Ajax_Requests_Handler {
 
 	public function souins_ajax_test_function() {
 
+		// $this->db->insert();
+
 	    // return
-	    echo json_encode('test function');
+	    echo json_encode( 'test function');
 	    wp_die();
 
 	}
