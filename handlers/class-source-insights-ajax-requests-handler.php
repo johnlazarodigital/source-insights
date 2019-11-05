@@ -72,6 +72,26 @@ class Source_Insights_Ajax_Requests_Handler {
 			array( $this, 'souins_ajax_test_function' )
 		);
 
+		add_action(
+			'wp_ajax_souins_ajax_source_add_new_post',
+			array( $this, 'souins_ajax_source_add_new_post')
+		);
+
+		add_action(
+			'wp_ajax_nopriv_souins_ajax_source_add_new_post',
+			array( $this, 'souins_ajax_source_add_new_post' )
+		);
+
+	}
+
+	public function souins_ajax_source_add_new_post() {
+
+		$result = $this->db->source_add_new_post( $_POST );
+
+	    // return
+	    echo json_encode( $result );
+	    wp_die();
+
 	}
 
 	public function souins_ajax_test_function() {

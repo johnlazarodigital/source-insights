@@ -147,7 +147,7 @@ class Source_Insights_Admin {
 	 */
 	public function source_insights_sources_content() {
 
-		echo 'sources';
+		include plugin_dir_path( __FILE__ ) . 'partials/source-insights-sources-content.php';
 		
 	}
 

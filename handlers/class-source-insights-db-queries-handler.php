@@ -50,4 +50,26 @@ class Source_Insights_Db_Queries_Handler {
 
 	}
 
+	public function source_add_new_post( $values ) {
+
+		$table_name = $this->wpdb->prefix . 'souins_sources';
+
+		$source = $values['source'];
+	
+		$result = $this->wpdb->query( $this->wpdb->prepare( 
+			"
+			INSERT INTO $table_name
+			( source )
+			VALUES ( %s )
+			",
+			$source
+		) );
+
+		if( ! $result )
+			return $this->wpdb->last_error;
+		
+		return $this->wpdb->insert_id;
+
+	}
+
 }
